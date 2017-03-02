@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7vW-Vf-P2o" id="G2B-Cf-IEB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTp-Zo-tCc">
@@ -111,7 +111,14 @@
                             <constraint firstAttribute="trailing" secondItem="3To-ZY-k8g" secondAttribute="trailing" id="oe7-4H-gJF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="x5q-EH-pP8"/>
+                    <navigationItem key="navigationItem" id="x5q-EH-pP8">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="k21-P9-bk5">
+                            <connections>
+                                <action selector="settingsbuttonTapped:" destination="vXZ-lx-hvc" id="ZLB-x7-Tdg"/>
+                                <segue destination="VSZ-4C-fOA" kind="presentation" id="8hP-Tm-ycE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="3To-ZY-k8g" id="pL6-c2-dLz"/>
                     </connections>
@@ -119,6 +126,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818.39999999999998" y="-558.17091454272872"/>
+        </scene>
+        <!--Search Setting View Controller-->
+        <scene sceneID="yzi-SX-pEu">
+            <objects>
+                <viewController id="kc8-fb-Not" customClass="SearchSettingViewController" customModule="GithubDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OKF-ho-yc0"/>
+                        <viewControllerLayoutGuide type="bottom" id="nHF-OL-3q5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ew4-H9-Ye9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="x5W-Gm-9N1">
+                                <rect key="frame" x="134" y="72" width="184" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="minStarsUpdated:" destination="kc8-fb-Not" eventType="valueChanged" id="2Ys-81-Byt"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Minimum stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANr-up-EMk">
+                                <rect key="frame" x="16" y="77" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO0-dh-haf">
+                                <rect key="frame" x="330" y="77" width="29" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MPa-yv-nwD">
+                        <barButtonItem key="leftBarButtonItem" title="Save" id="WNC-HA-Fbr">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="kc8-fb-Not" id="ahT-sZ-P61"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="mKT-vh-zcx">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="kc8-fb-Not" id="TGg-mv-Xut"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="minStarSlider" destination="x5W-Gm-9N1" id="dfN-mS-qR9"/>
+                        <outlet property="minStarValue" destination="GO0-dh-haf" id="aKj-D8-LwG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i8G-PI-gPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2312.8000000000002" y="-559.07046476761627"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FpP-oR-azb">
@@ -137,6 +201,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dru-y2-L7C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="-557"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Y17-IJ-h0V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VSZ-4C-fOA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cR8-kI-30d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kc8-fb-Not" kind="relationship" relationship="rootViewController" id="m7W-cf-WAq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LO9-rV-dbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520.8" y="-559.07046476761627"/>
         </scene>
     </scenes>
 </document>

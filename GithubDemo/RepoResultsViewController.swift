@@ -9,8 +9,13 @@
 import UIKit
 import MBProgressHUD
 
+protocol SettingsPresentingViewControllerDelegate: class {
+    func didSaveSettings(settings: GithubRepoSearchSettings)
+    func didCancelSettings()
+}
+
 // Main ViewController
-class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SettingsPresentingViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     var searchBar: UISearchBar!
@@ -63,14 +68,29 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
             // Print the returned repositories to the output window
             self.repos = newRepos
             self.tableView.reloadData()
-            for repo in newRepos {
+            /*for repo in newRepos {
                 print(repo)
-            }   
+            }*/
             
             MBProgressHUD.hide(for: self.view, animated: true)
             }, error: { (error) -> Void in
                 print(error)
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navController = segue.destination as! UINavigationController
+        let vc = navController.topViewController as! SearchSettingViewController
+        vc.settings = self.searchSettings
+        vc.delegate = self
+    }
+    
+    func didSaveSettings(settings: GithubRepoSearchSettings) {
+        searchSettings = settings
+        doSearch()
+    }
+    
+    func didCancelSettings() {
     }
 }
 
@@ -90,6 +110,8 @@ extension RepoResultsViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        searchSettings.searchString = "";
+        doSearch()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
